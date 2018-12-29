@@ -1,34 +1,41 @@
-# XXX/ Этот код необходим только при использовании русских букв на Windows
-if (Gem.win_platform?)
-  Encoding.default_external = Encoding.find(Encoding.locale_charmap)
-  Encoding.default_internal = __ENCODING__
+answers = [
+  # Положительные
+  "Бесспорно",
+  "Предрешено",
+  "Никаких сомнений",
+  "Определённо да",
+  "Можешь быть уверен в этом",
 
-  [STDIN, STDOUT].each do |io|
-    io.set_encoding(Encoding.default_external, Encoding.default_internal)
-  end
-end
+  # Нерешительно положительные
+  "Мне кажется — «да»",
+  "Вероятнее всего",
+  "Хорошие перспективы",
+  "Знаки говорят — «да»",
+  "Да",
 
-# answers.txt - файл вариантов ответов магического шара
-# greetings.txt - файл вариантов приветствий
-pach = File.dirname(__FILE__)
-pach_answers = pach + "/date/answers.txt"
-pach_greetings = pach + "/date/greetings.txt"
+  # Нейтральные
+  "Пока не ясно, попробуй снова",
+  "Спроси позже",
+  "Лучше не рассказывать",
+  "Сейчас нельзя предсказать",
+  "Сконцентрируйся и спроси опять",
 
-puts pach_answers
-puts pach_greetings
+  # Отрицательные
+  "Даже не думай",
+  "Мой ответ — «нет»",
+  "По моим данным — «нет»",
+  "Перспективы не очень хорошие",
+  "Весьма сомнительно"
+]
 
-abort "Не найден файл вопросов - #{pach_answers}" unless File.exist?(pach_answers)
-file = File.new(pach_answers, "r:UTF-8")
-answers = file.readlines
-file.close
+greetings = [
+  "Привет, дорогой друг. Отвечаю на твой вопрос...",
+  "Кто вопрошает, тот получит ответ:",
+  "Здравствуй, смертный. Сегодня для тебя такой ответ:"
+]
 
-if File.exist?(pach_greetings)
-  file =File.new(pach_greetings,"r:UTF-8")
-  greetings = file.readlines
-  file.close
-  puts greetings.sample
-  puts
-  rand(3)
-end
+puts greetings.sample
+
+sleep 3
 
 puts answers.sample
